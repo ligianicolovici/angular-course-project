@@ -1,9 +1,9 @@
 <div class="container">
-    <app-header></app-header>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <app-recipes></app-recipes>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <app-shopping-list></app-shopping-list>
-    </div>
+  <app-header (onUserSelect)="onUserChoice($event)"></app-header>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <app-recipes *ngIf="selectedPage === 'Recipes'"></app-recipes>
+    <app-shopping-list
+      *ngIf="selectedPage === 'Shopping List'"
+    ></app-shopping-list>
+  </div>
 </div>

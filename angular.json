@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "course-app"
+  "defaultProject": "course-app",
+  "cli": {
+    "analytics": false
+  }
 }

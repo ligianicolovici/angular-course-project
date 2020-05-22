@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { RecipeItemComponent } from '../recipe-item/recipe-item.component';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Recipe } from '../recipe.model';
 
 @Component({
@@ -8,6 +7,8 @@ import { Recipe } from '../recipe.model';
   styleUrls: ['./recipe-list.component.css'],
 })
 export class RecipeListComponent {
+  @Output() usersChoiceRecipe = new EventEmitter<Recipe>();
+
   recipes: Recipe[] = [
     new Recipe(
       'recipe1',
@@ -20,4 +21,8 @@ export class RecipeListComponent {
       'https://www.bbcgoodfood.com/sites/default/files/recipe-collections/collection-image/2018/09/recipe-image-legacy-id-327529_11.jpg'
     ),
   ];
+  registerSelection(recipe: Recipe) {
+    this.usersChoiceRecipe.emit(recipe);
+    console.log('recipe selected');
+  }
 }
