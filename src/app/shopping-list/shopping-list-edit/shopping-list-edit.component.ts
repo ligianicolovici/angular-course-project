@@ -17,6 +17,7 @@ export class ShoppingListEditComponent {
   @ViewChild('amountInput', { static: true }) ingredientAmount: ElementRef;
   @Output() ingredientSetUp = new EventEmitter<Ingredient>();
 
+  // tslint:disable-next-line: use-lifecycle-interface
   ngAfterViewInit(): void {
     console.log(this.ingredientAmount.nativeElement.textContent);
     console.log(this.ingredientName.nativeElement.textContent);

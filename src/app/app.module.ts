@@ -11,6 +11,7 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { DropdownDirective } from './shared/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { FormsModule } from '@angular/forms';
     RecipeListComponent,
     RecipeItemComponent,
     RecipeDetailComponent,
+    DropdownDirective,
   ],
   imports: [BrowserModule, NgbModule, FormsModule],
   providers: [],
