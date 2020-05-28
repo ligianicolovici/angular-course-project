@@ -17,4 +17,17 @@ export class ShoppingListService {
     this.ingrediants.push(ingredient);
     this.newIngredientEvent.emit(this.ingrediants.slice());
   }
+  addListOfIngredients(ingrediants: Ingredient[]) {
+    ingrediants.forEach((ing) => {
+      const search = this.ingrediants.find(
+        (ingredient) => ingredient.name === ing.name
+      );
+      if (search) {
+        search.quantity = search.quantity + ing.quantity;
+      } else {
+        this.ingrediants.push(ing);
+      }
+    });
+    this.newIngredientEvent.emit(this.ingrediants.slice());
+  }
 }
