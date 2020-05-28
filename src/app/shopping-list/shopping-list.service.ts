@@ -1,5 +1,6 @@
 import { Ingredient } from '../shared/ingredients.model';
 import { EventEmitter } from '@angular/core';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 export class ShoppingListService {
   private ingrediants: Ingredient[] = [
