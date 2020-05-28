@@ -6,6 +6,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { Ingredient } from 'src/app/shared/ingredients.model';
+import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'app-shopping-list-edit',
@@ -15,7 +16,8 @@ import { Ingredient } from 'src/app/shared/ingredients.model';
 export class ShoppingListEditComponent {
   @ViewChild('nameInput', { static: true }) ingredientName: ElementRef;
   @ViewChild('amountInput', { static: true }) ingredientAmount: ElementRef;
-  @Output() ingredientSetUp = new EventEmitter<Ingredient>();
+
+  constructor(private shoppingListService: ShoppingListService) {}
 
   // tslint:disable-next-line: use-lifecycle-interface
   ngAfterViewInit(): void {
@@ -26,6 +28,6 @@ export class ShoppingListEditComponent {
     const ingName = this.ingredientName.nativeElement.value;
     const ingAmount = this.ingredientAmount.nativeElement.value;
     const newIngredient = new Ingredient(ingName, ingAmount);
-    this.ingredientSetUp.emit(newIngredient);
+    this.shoppingListService.addNewIngredient(newIngredient);
   }
 }
