@@ -1,28 +1,18 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.css'],
 })
-export class RecipeListComponent {
-  @Output() usersChoiceRecipe = new EventEmitter<Recipe>();
+export class RecipeListComponent implements OnInit {
+  recipes: Recipe[];
 
-  recipes: Recipe[] = [
-    new Recipe(
-      'recipe1',
-      'test',
-      'https://www.bbcgoodfood.com/sites/default/files/recipe-collections/collection-image/2013/05/recipe-image-legacy-id-1074500_11.jpg'
-    ),
-    new Recipe(
-      'recipe2',
-      'test2',
-      'https://www.bbcgoodfood.com/sites/default/files/recipe-collections/collection-image/2018/09/recipe-image-legacy-id-327529_11.jpg'
-    ),
-  ];
-  registerSelection(recipe: Recipe) {
-    this.usersChoiceRecipe.emit(recipe);
-    console.log('recipe selected');
+  constructor(private recipeService: RecipeService) {}
+
+  ngOnInit(): void {
+    this.recipes = this.recipeService.getRecipes();
   }
 }
