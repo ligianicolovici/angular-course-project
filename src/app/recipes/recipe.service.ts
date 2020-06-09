@@ -28,6 +28,7 @@ export class RecipeService {
       ]
     ),
   ];
+  recipeEvent = new Subject<Recipe[]>();
 
   constructor(private shoppingListService: ShoppingListService) {}
 
@@ -39,5 +40,22 @@ export class RecipeService {
   }
   getRecipeByIndex(index: number) {
     return this.recipes[index];
+  }
+  updateRecipe(index: number, updatedRecipe: Recipe) {
+    this.recipes[index] = updatedRecipe;
+    this.recipeEvent.next(this.getRecipes());
+  }
+  addRecipe(newRecipe: Recipe) {
+    this.recipes.push(newRecipe);
+    this.recipeEvent.next(this.getRecipes());
+  }
+  updateIngredientList(recipeIndex: number, newIngredientList: Ingredient[]) {
+    console.log(newIngredientList);
+    this.recipes[recipeIndex].ingredients = newIngredientList;
+    this.recipeEvent.next(this.getRecipes());
+  }
+  deleteRecipe(recipeIndex: number) {
+    this.recipes.splice(recipeIndex, 1);
+    this.recipeEvent.next(this.getRecipes());
   }
 }
