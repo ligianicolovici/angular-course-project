@@ -8,15 +8,15 @@ export class ShoppingListService {
     new Ingredient('Apples', 5),
     new Ingredient('Tomatoes', 10),
   ];
-  newIngredientEvent = new Subject<Ingredient[]>();
-
+  changedIngredientsEvent = new Subject<Ingredient[]>();
+  startedEditing = new Subject<number>();
   getIngrediants() {
     return this.ingrediants.slice();
   }
 
   addNewIngredient(ingredient: Ingredient) {
     this.ingrediants.push(ingredient);
-    this.newIngredientEvent.next(this.ingrediants.slice());
+    this.changedIngredientsEvent.next(this.ingrediants.slice());
   }
   addListOfIngredients(ingrediants: Ingredient[]) {
     ingrediants.forEach((ing) => {
@@ -29,6 +29,18 @@ export class ShoppingListService {
         this.ingrediants.push(ing);
       }
     });
-    this.newIngredientEvent.next(this.ingrediants.slice());
+    this.changedIngredientsEvent.next(this.ingrediants.slice());
+  }
+  getIngredient(index: number) {
+    return this.ingrediants[index];
+  }
+  updateIngredient(index: number, newIngredient: Ingredient) {
+    this.ingrediants[index] = newIngredient;
+    this.changedIngredientsEvent.next(this.ingrediants.slice());
+  }
+  deleteIngredient(index: number) {
+    this.ingrediants.splice(index, 1);
+    this.changedIngredientsEvent.next(this.ingrediants.slice());
+    console.log(this.ingrediants);
   }
 }
