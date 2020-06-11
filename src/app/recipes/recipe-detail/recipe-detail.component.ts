@@ -12,11 +12,13 @@ export class RecipeDetailComponent implements OnInit {
   currentRecipe: Recipe;
   nameOfCurrentRecipe: string;
   id: number;
+
   constructor(
     private recipeSercive: RecipeService,
     public route: ActivatedRoute,
     public router: Router
   ) {}
+
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
