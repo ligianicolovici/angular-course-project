@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Recipe } from '../recipes/recipe.model';
 import { RecipeService } from '../recipes/recipe.service';
 import { Subject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, take, exhaustMap } from 'rxjs/operators';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
@@ -36,10 +37,10 @@ export class DataStorageService {
       .get<Recipe[]>('https://course-project-7f1f5.firebaseio.com/recipes.json')
       .pipe(
         map((recipes) => {
-          return recipes.map((recipes) => {
+          return recipes.map((recipe) => {
             return {
-              ...recipes,
-              ingredients: recipes.ingredients ? recipes.ingredients : [],
+              ...recipe,
+              ingredients: recipe.ingredients ? recipe.ingredients : [],
             };
           });
         }),

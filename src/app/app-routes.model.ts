@@ -7,12 +7,15 @@ import { RecipeItemComponent } from './recipes/recipe-item/recipe-item.component
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeDetailDefaultComponent } from './recipes/recipe-detail-default/recipe-detail-default.component';
 import { RecipesResolverService } from './recipes/recipe-resolver.service';
+import { AuthComponent } from './auth/auth.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/recipes', pathMatch: 'full' },
+  { path: '', redirectTo: '/auth', pathMatch: 'full' },
   {
     path: 'recipes',
     component: RecipesComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', component: RecipeDetailDefaultComponent, pathMatch: 'full' },
       { path: 'new', component: RecipeEditComponent },
@@ -29,6 +32,7 @@ const appRoutes: Routes = [
     ],
   },
   { path: 'shopping-list', component: ShoppingListComponent },
+  { path: 'auth', component: AuthComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
