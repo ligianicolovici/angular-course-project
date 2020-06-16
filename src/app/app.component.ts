@@ -1,17 +1,4 @@
-import {
-  Component,
-  Injectable,
-  OnDestroy,
-  SimpleChanges,
-  OnChanges,
-  OnInit,
-} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { DataStorageService } from './shared/data-storage.service';
-import { HeaderComponent } from './header/header.component';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Recipe } from './recipes/recipe.model';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 
 @Component({
