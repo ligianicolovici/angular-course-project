@@ -5,15 +5,10 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipesComponent } from './recipes.component';
 import { RecipeDetailDefaultComponent } from './recipe-detail-default/recipe-detail-default.component';
-import { AppRoutesComponent } from '../app-routes.model';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CommonModule } from '@angular/common';
-import { DropdownDirective } from '../shared/dropdown.directive';
-import { RouterModule } from '@angular/router';
 import { RecipesRoutingModule } from './recipes-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -24,14 +19,7 @@ import { RecipesRoutingModule } from './recipes-routing.module';
     RecipeDetailComponent,
     RecipeDetailDefaultComponent,
     RecipeEditComponent,
-    DropdownDirective,
   ],
-  imports: [
-    CommonModule,
-    NgbModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    RecipesRoutingModule,
-  ],
+  imports: [SharedModule, NgbModule, ReactiveFormsModule, RecipesRoutingModule],
 })
 export class RecipesModule {}
