@@ -13,11 +13,12 @@ export const SIGN_UP_START = '[Auth] SIGN_UP_START';
 export class AuthenticateSuccess implements Action {
   readonly type = AUTHENTICATE_SUCCESS;
   constructor(
-    public playload: {
+    public payload: {
       email: string;
       userID: string;
       token: string;
       expirationDate: Date;
+      redirect: boolean;
     }
   ) {}
 }

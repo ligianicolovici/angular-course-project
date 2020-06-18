@@ -1,6 +1,4 @@
 import { Actions, ofType, Effect } from '@ngrx/effects';
-import * as AuthActions from './auth.actions';
-import { UserCredentials } from '../auth.model';
 import { switchMap, catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -10,6 +8,7 @@ import { Router } from '@angular/router';
 import { User } from '../user.model';
 import { AuthService } from '../auth.service';
 
+import * as AuthActions from './auth.actions';
 export interface AuthResponseData {
   idToken: string;
   email: string;
@@ -33,6 +32,7 @@ const handeAuthentication = (
     userID: userID,
     token: token,
     expirationDate,
+    redirect: true,
   });
 };
 const handleError = (errorRes: any) => {
@@ -132,8 +132,10 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   authRedirect = this.actions$.pipe(
     ofType(AuthActions.AUTHENTICATE_SUCCESS),
-    tap(() => {
-      this.router.navigate(['./']);
+    tap((authSuccessAction: AuthActions.AuthenticateSuccess) => {
+      if (authSuccessAction.payload.redirect) {
+        this.router.navigate(['./']);
+      }
     })
   );
 
@@ -178,6 +180,7 @@ export class AuthEffects {
           userID: loadedUser.id,
           token: loadedUser.token,
           expirationDate: new Date(userData._tokenExpirationDate),
+          redirect: false,
         });
       }
       return { type: 'DUMMY' };
